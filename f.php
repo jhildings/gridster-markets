@@ -55,6 +55,7 @@ url :"https://bitcoinwisdom.com/markets/huobi/btccny" },
 
 console.log(markets)
 var gridster;
+var localData = JSON.parse(localStorage.getItem('myMarkets'));
 
 
 function renderMarkets(markets) {
@@ -68,7 +69,8 @@ function renderMarkets(markets) {
 }
 
 $(function(){
-  renderMarkets(localData);
+  if(localData != undefined)
+	  renderMarkets(localData);
   var items = [];
   $.each( markets, function( key,  val ) {
   
