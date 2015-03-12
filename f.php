@@ -32,15 +32,6 @@ iframe {
 
     <script type="text/javascript">
 
-var Coinbase = 
-{"Coinbase":
-{
-name: "Coinbase" ,
-url :"https://bitcoinwisdom.com/markets/bitfinex/btcusd"
-}
-}
-
-console.log(Coinbase)
 
 var markets = {
 "Bitfiniex":
@@ -63,10 +54,21 @@ url :"https://bitcoinwisdom.com/markets/huobi/btccny" },
 };
 
 console.log(markets)
- var gridster;
+var gridster;
+
+
+function renderMarkets(markets) {
+
+ $.each( markets, function( key,  val ) {
+    $("#exchanges").append("<div><iframe src="+val+" >" + val +  val  + "</iframe></div>")
+})
+
+
+
+}
 
 $(function(){
-
+  renderMarkets(localData);
   var items = [];
   $.each( markets, function( key,  val ) {
   
@@ -91,11 +93,19 @@ $(function(){
              
              */
              
-
+var usermarkets = [];
 $( "span" ).click(function(e) {
   var ex =   $(this).text();
   var ex2 =  $(this).attr('id');
+  console.log(ex2)
   var u = markets[ex2].url;
+
+  usermarkets.push(markets[ex2].url)
+
+  var dataToStore = JSON.stringify(usermarkets);
+  localStorage.setItem('myMarkets', dataToStore);
+
+  console.log(usermarkets)	  
   $("#exchanges").append("<div><iframe src="+u+" >" + ex +  u  + "</iframe></div>")
 });
              
